@@ -1,0 +1,27 @@
+@import './Color.scss';
+
+.backdrop {
+    height: 100vh;
+    min-height: 540px;
+    background-color: aliceblue;
+}
+
+.welcome-box {
+    min-width: 400px !important;
+    max-width: 800px !important;
+    background-color: #fff;
+}
+// Large devices (desktops, less than 1200px)
+@media (min-width: 1199.98px) { 
+    .welcome-box {
+        margin-top: 175px; 
+    } 
+}
+
+.welcome-image {}
+
+.desc {
+    padding-left: 50px;
+    padding-right: 50px;
+    text-align: left;
+}
