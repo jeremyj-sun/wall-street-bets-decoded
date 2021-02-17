@@ -11,18 +11,28 @@ import {
 } from "react-router-dom";
 import '../styles/Nav.scss';
 
+const HOME = 0;
+const GAINS = 1;
+const LOSSES = 2;
+
 export class Nav extends Component {
     state = {
-        isOpen: false
+        isOpen: false,
+        active: HOME
     };
 
     toggleCollapse = () => {
         this.setState({ isOpen: !this.state.isOpen });
     }
 
+    handleClick = page => () => {
+        console.log(this.state.active);
+        this.setState({active : page});
+    }
+
     render() {
         return (
-            <Router>
+            
                 <MDBNavbar dark expand="md" className="scrolling-navbar fixed-top py-1">
                     <MDBNavbarBrand>
                         <MDBBox tag="div" className="px-3 logo-wrapper">
@@ -38,15 +48,15 @@ export class Nav extends Component {
                     <MDBNavbarToggler onClick={this.toggleCollapse} />
                     <MDBCollapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>
                         <MDBNavbarNav className="nav-list" left>
-                            <MDBNavItem active>
-                                <MDBNavLink className="nav-list-item mx-4" to="#!">Home <MDBIcon icon="home" /></MDBNavLink>
+                            <MDBNavItem active={this.state.active === HOME}>
+                                <MDBNavLink onClick={this.handleClick(HOME)} className="nav-list-item mx-4" to="/">Home <MDBIcon icon="home" /></MDBNavLink>
                             </MDBNavItem>
-                            <MDBNavItem>
-                                <MDBNavLink className="nav-list-item mx-4" to="#!">Gains <img src="https://styles.redditmedia.com/t5_2th52/styles/postUpvoteIconActive_130uvmw23vb11.png" 
+                            <MDBNavItem active={this.state.active === GAINS}>
+                                <MDBNavLink onClick={this.handleClick(GAINS)} className="nav-list-item mx-4" to="/gains">Gains <img src="https://styles.redditmedia.com/t5_2th52/styles/postUpvoteIconActive_130uvmw23vb11.png" 
                                 className="d-inline" height="24px" alt="upvote"/></MDBNavLink>
                             </MDBNavItem>
-                            <MDBNavItem>
-                                <MDBNavLink className="nav-list-item mx-4" to="#!">Losses  <img src="https://styles.redditmedia.com/t5_2th52/styles/postDownvoteIconActive_lrmmpto33vb11.png" 
+                            <MDBNavItem active={this.state.active === LOSSES} >
+                                <MDBNavLink  onClick={this.handleClick(LOSSES)} className="nav-list-item mx-4" to="#!">Losses  <img src="https://styles.redditmedia.com/t5_2th52/styles/postDownvoteIconActive_lrmmpto33vb11.png" 
                                 className="d-inline" height="24px" alt="downvote"/></MDBNavLink>
                             </MDBNavItem>
                         </MDBNavbarNav>
@@ -65,7 +75,7 @@ export class Nav extends Component {
                         </MDBNavbarNav>
                     </MDBCollapse>
                 </MDBNavbar>
-            </Router>
+            
         );
     }
 }

@@ -3,13 +3,21 @@ import { MDBMask, MDBRow, MDBCol, MDBBtn, MDBView, MDBContainer, MDBAnimation, M
 import Nav from './Nav';
 import '../styles/Home.scss'
 import welcome from '../assets/placeholder-frame.png';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+} from "react-router-dom";
 
 export class Home extends Component {
     //Image frame tool: https://browserframe.com/
     render() {
         return (
             <React.Fragment>
-                <Nav />
+                
+               
+                
                 {/*Wrapper*/}
                 <MDBContainer fluid className="d-flex flex-column justify-content-center align-items-center px-0 backdrop">
                     <MDBContainer className="py-4 invisible">

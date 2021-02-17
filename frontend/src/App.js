@@ -5,6 +5,7 @@ import Home from './components/Home';
 import Login from './components/Login';
 import Gains from './components/Gains';
 import Losses from './components/Losses';
+import Nav from './components/Nav'
 
 function App() {
   //Planned changes:
@@ -12,8 +13,10 @@ function App() {
   * Likely no need for Login page
   * Can combine Gains and Losses into a single view
   */
+
   return (
     <div className="App">
+      <Nav />
       <Switch>
         <Route path="/user" component={Login} />
         <Route path="/gains" component={Gains} />
