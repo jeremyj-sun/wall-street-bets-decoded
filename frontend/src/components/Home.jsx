@@ -10,6 +10,7 @@ import {
     Link
 } from "react-router-dom";
 import emailjs from 'emailjs-com'
+import Modal from './Modal'
 
 const serviceid = 'service_gmail';
 const userid = 'user_sgHKs82f6tKP9sjht8mbs';
@@ -17,10 +18,16 @@ const template_welcome = 'template_welcome';
 
 export class Home extends Component {
     
+    constructor(props) {
+        super(props);
+        this.subscribeModal = React.createRef(); //reference to the subscribeModal
+    }
+
     /* Get list of subscribers from database */
     getSubscribers() {
         //LOGIC GOES HERE
-        return [{name_to: 'Jeremy', email_to: 'sunnykid1223@gmail.com'}, {name_to: 'Dennis', email_to: 'dennisbae7@gmail.com'}];
+        //[{name_to: 'Jeremy', email_to: 'sunnykid1223@gmail.com'}, {name_to: 'Dennis', email_to: 'dennisbae7@gmail.com'}]
+        return [{name_to: 'Jeremy', email_to: 'sunnykid1223@gmail.com'}];
     }
     
     //Image frame tool: https://browserframe.com/
@@ -52,6 +59,13 @@ export class Home extends Component {
         var subscribers = this.getSubscribers(); //list of subscriber objects
         subscribers.forEach((subscriber) => {this.sendEmail(e, template, subscriber)});
         console.log('Emails sent')
+    }
+
+    //Subscribe Modal + send email
+    handleSubscribe (e, template) {
+        this.subscribeModal.current.toggle();
+        this.sendEmailList(e, template); // TURN THIS OFF WHEN TESTING (there is a 200 email quota)
+        console.log("New subscriber");
     }
 
     render() {
@@ -94,7 +108,7 @@ export class Home extends Component {
                             <MDBRow className="my-2">
                                 <MDBCol>
                                     {/*sendEmailList is for testing purposes. Replace this.sendEmailList with this.sendEmail, passing a user object {name_to: , email_to: } */}
-                                <MDBBtn onClick={(e, template) => this.sendEmailList(e, template_welcome)}color="deep-orange" size="lg"><b>SUBSCRIBE <MDBIcon icon="bell" /></b></MDBBtn>
+                                <MDBBtn onClick={(e, template) => this.handleSubscribe(e, template_welcome)} color="deep-orange" size="lg"><b>SUBSCRIBE <MDBIcon icon="bell" /></b></MDBBtn>
                                 </MDBCol>
                             </MDBRow>
                         </MDBContainer>
@@ -102,6 +116,10 @@ export class Home extends Component {
                     <MDBContainer className="py-4 invisible">
                         bottom padding
                     </MDBContainer>
+                    <Modal ref={this.subscribeModal} title="Thanks for subscribing to Wall Street Bets Decoded!">
+                        <p>You will receive a confirmation email shortly.</p>
+                        <p>Happy Trading!</p>
+                    </Modal>
                 </MDBContainer>
                     
             </React.Fragment>

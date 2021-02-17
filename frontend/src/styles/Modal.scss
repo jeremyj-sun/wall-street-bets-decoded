@@ -1,0 +1,18 @@
+@import './Color.scss';
+
+.modal-header {
+    color: white;
+    font-weight: 500;
+}
+
+.modal-header-wrapper {
+    background: $reddit-orange;
+}
+
+.modal-body {
+    background: aliceblue;
+    font-size: 1.15rem;
+}
+.modal-footer {
+    background: $orange-red;
+}
